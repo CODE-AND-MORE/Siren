@@ -146,6 +146,16 @@ extension PresentationManager {
         alertController?.hide(window: updaterWindow)
         alertController?.dismiss(animated: true, completion: nil)
         updaterWindow.resignKey()
+        updaterWindow.rootViewController = nil
+        updaterWindow.removeFromSuperview()
+        
+        for window in UIApplication.shared.windows {
+            if (window.rootViewController != nil && window.rootViewController! is SirenViewController) {
+              window.rootViewController = nil
+              window.resignKey()
+              window.removeFromSuperview()
+            }
+        }
     }
 }
 
